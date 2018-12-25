@@ -1,0 +1,9 @@
+[package]
+name = "nes-rs"
+version = "0.1.0"
+authors = ["kenkoooo <kenkou.n@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+gl = "0.6.0"
+glfw = "0.25.1"
