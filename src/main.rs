@@ -4,6 +4,7 @@ extern crate nes_rs;
 
 use glfw::{Action, Context, Key};
 use nes_rs::nes;
+use nes_rs::ui::GameView;
 use std::env;
 
 const WIDTH: u32 = 256;
@@ -33,9 +34,33 @@ fn run(path: &str) {
     window.make_current();
 
     gl::load_with(|s| window.get_proc_address(s));
-}
 
-fn start(path: &str, window: &mut glfw::Window) {
     let hash = "a".to_owned();
     let console = nes::console::Console::new(path);
+    let mut view = GameView::new(window, console, path.to_owned(), hash);
+    view.enter();
+
+    let mut timestamp = unsafe { glfw::ffi::glfwGetTime() };
+    while !view.window.should_close() {
+        unsafe {
+            gl::Clear(gl::COLOR_BUFFER_BIT);
+        }
+        let now = unsafe { glfw::ffi::glfwGetTime() };
+        let dt = now - timestamp;
+        timestamp = now;
+        view.update(now, dt);
+        view.window.swap_buffers();
+        glfw.poll_events();
+
+        for (_, event) in glfw::flush_messages(&events) {
+            handle_window_event(&mut view.window, event);
+        }
+    }
+}
+
+fn handle_window_event(window: &mut glfw::Window, event: glfw::WindowEvent) {
+    match event {
+        glfw::WindowEvent::Key(Key::Escape, _, Action::Press, _) => window.set_should_close(true),
+        _ => {}
+    }
 }

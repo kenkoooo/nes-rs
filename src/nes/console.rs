@@ -1,15 +1,23 @@
-use crate::nes::apu::APU;
-use crate::nes::cpu::CPU;
-use crate::nes::ppu::PPU;
+use crate::nes::cartridge;
+use crate::nes::{Cartridge, APU, CPU, PPU};
+use std::io;
 
 pub struct Console {
     cpu: CPU,
     apu: APU,
     ppu: PPU,
+    pub cartridge: Cartridge,
 }
 
 impl Console {
-    pub fn new(path: &str) -> Self {
-        unimplemented!()
+    pub fn new(path: &str) -> io::Result<Console> {
+        let cartridge = cartridge::load_nes_file(path)?;
+        let mut ram = [0; 2048];
+
+        unimplemented!();
+    }
+
+    pub fn reset(&mut self) {
+        unimplemented!();
     }
 }
