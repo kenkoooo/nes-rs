@@ -8,7 +8,7 @@ pub struct Cartridge {
     prg: Vec<u8>,
     chr: Vec<u8>,
     sram: [u8; 0x2000],
-    mapper: u8,
+    pub mapper: u8,
     mirror: u8,
     pub battery: u8,
 }

@@ -1,5 +1,5 @@
 use crate::nes::cartridge;
-use crate::nes::{Cartridge, APU, CPU, PPU};
+use crate::nes::{Cartridge, Controller, APU, CPU, PPU};
 use std::io;
 
 pub struct Console {
@@ -13,6 +13,8 @@ impl Console {
     pub fn new(path: &str) -> io::Result<Console> {
         let cartridge = cartridge::load_nes_file(path)?;
         let mut ram = [0; 2048];
+        let controller1 = Controller::new();
+        let controller2 = Controller::new();
 
         unimplemented!();
     }
