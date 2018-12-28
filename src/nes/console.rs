@@ -1,6 +1,8 @@
 use crate::nes::cartridge;
 use crate::nes::{Cartridge, Controller, Mapper, APU, CPU, PPU};
 use std::io;
+use std::rc::Rc;
+use std::cell::RefCell;
 
 pub struct Console {
     cpu: CPU,
@@ -20,6 +22,7 @@ impl Console {
         let controller1 = Controller::new();
         let controller2 = Controller::new();
         let mapper = Mapper::new(&cartridge);
+
 
         unimplemented!();
     }
