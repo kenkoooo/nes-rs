@@ -36,7 +36,7 @@ fn run(path: &str) {
     gl::load_with(|s| window.get_proc_address(s));
 
     let hash = "a".to_owned();
-    let console = nes::console::Console::new(path);
+    let console = nes::console::Console::new(path).expect("");
     let mut view = GameView::new(window, console, path.to_owned(), hash);
     view.enter();
 

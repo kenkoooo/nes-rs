@@ -5,7 +5,7 @@ use std::io::prelude::*;
 use crate::nes::ines::NesFileHeader;
 
 pub struct Cartridge {
-    prg: Vec<u8>,
+    pub prg: Vec<u8>,
     chr: Vec<u8>,
     sram: [u8; 0x2000],
     pub mapper: u8,
